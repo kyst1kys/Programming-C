@@ -3,18 +3,17 @@
 #include <string.h>
 #include <windows.h>
 
-// Структура для зберігання інформації про книгу та вказівника на наступний елемент
 typedef struct Book {
-    char title[100];     // назва книги
-    float price;         // ціна
-    int pages;           // число сторінок
-    char language[50];   // мова
-    float weight;        // вага (в кілограмах)
-    int year;            // рік видання
+    char title[100];     
+    float price;         
+    int pages;          
+    char language[50];   
+    float weight;        
+    int year;            
     struct Book* next;   // вказівник на наступну книгу у списку
 } Book;
 
-// Функція для створення нового елемента списку (книги)
+// Функція для створення нового елемента списку
 Book* createBook(const char* title, float price, int pages, const char* language, float weight, int year) {
     Book* newBook = (Book*)malloc(sizeof(Book));
     if (newBook == NULL) {
@@ -22,7 +21,6 @@ Book* createBook(const char* title, float price, int pages, const char* language
         exit(1);
     }
     
-    // Копіюємо рядки безпечно
     strncpy(newBook->title, title, sizeof(newBook->title) - 1);
     newBook->title[sizeof(newBook->title) - 1] = '\0';
     
@@ -99,10 +97,8 @@ int main() {
     appendBook(&library, "Гаррі Поттер і келих вогню", 450.75, 672, "Українська", 0.85, 2000);
     appendBook(&library, "Гаррі Поттер і Орден Фенікса", 470.00, 816, "Українська", 0.95, 2003);
     
-    // Виводимо інформацію на екран
     printBooks(library);
     
-    // Обов'язково очищаємо пам'ять перед завершенням програми
     freeBooks(library);
     
     return 0;
